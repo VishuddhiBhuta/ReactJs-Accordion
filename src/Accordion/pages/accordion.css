@@ -1,5 +1,5 @@
 .accordion-wrapper {
-    max-width: 400px;
+    max-width: 500px;
     margin: 30px auto;
 }
 
@@ -20,4 +20,12 @@
     border: 1px solid #f0f0f0;
     padding: 10px 15px;
     font-size: 14px;
+}
+
+.accordion-methods {
+    margin-bottom: 50px;
+}
+
+.accordion-methods h3 {
+    color: blue;
 }

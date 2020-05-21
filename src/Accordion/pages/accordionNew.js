@@ -10,64 +10,52 @@ import './accordion.css'
  * 
  */
 
-export default class Accordion extends React.Component {
+export default class AccordionNew extends React.Component {
     state = {
         data: [
             {
                 title: "Panel heading 1",
-                content: "Some text....",
-                isExpanded: true
+                content: "Some text...."
             },
             {
                 title: "Panel heading 2",
-                content: "Some other text....",
-                isExpanded: false
+                content: "Some other text...."
             },
             {
                 title: "Panel heading 3",
-                content: "Some dummy text goes here....",
-                isExpanded: false
+                content: "Some dummy text goes here...."
             }
         ],
-        isCollapsed: true
+        expandedIndex: -1 //Close all tabs
     }
 
-    //Manage Click 
-    handleClick = (index) => {
-        let newArr = [...this.state.data];
-
-        let status = {
-            isExpanded: !newArr[index].isExpanded
-        }
-
-        newArr[index].isExpanded = status.isExpanded
-
-        console.log(newArr)
-
-        newArr.forEach((items, selectedindex) => {
-            if (index !== selectedindex) {
-                items.isExpanded = false
-            }
-        });
-
+    //Click 
+    handleClick = (clickedIndex) => {
         this.setState({
-            data: newArr,
+            expandedIndex: clickedIndex //Initialize the one on which you clicked [its passing index of clicked Item]
         });
+
+        // Below code will enable the toggle state of item also.
+
+        // this.setState({
+        //     expandedIndex: this.state.expandedIndex === clickedIndex ? -1 : clickedIndex
+        // })
     }
 
     render() {
+        console.log(this.state.expandedIndex)
         return (
             this.state.data.map((items, index) => {
                 return (
                     <div className="panel" key={items.title + index}>
                         <div
                             className="panel-title"
-                            onClick={(item) => {
+                            onClick={() => {
                                 this.handleClick(index);
                             }}>
                             {this.state.data[index].title}
                         </div>
-                        {(this.state.data[index].isExpanded) &&
+                        {index === this.state.expandedIndex &&
                             <div className="panel-content">
                                 <p>{this.state.data[index].content}</p>
                             </div>
